@@ -1,0 +1,35 @@
+{% load static %}
+
+<!-- Navigation -->
+    <nav class="navbar fixed-top navbar-toggleable-md navbar-light" id="mainNav">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarExample" aria-controls="navbarExample" aria-expanded="false" aria-label="Toggle navigation">
+            Menu <i class="fa fa-bars"></i>
+        </button>
+        <div class="container">
+             <img class="img-fluid" src="/static/assets/img/logo1.png" width="5%" alt=""> &nbsp; &nbsp;
+            <a class="navbar-brand" href="#page-top">Herbario</a>
+            <div class="collapse navbar-collapse" id="navbarExample">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'catalogos:presentacion' %}">Presentaci&oacute;n</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="presentacion.html">Colecciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="investigaciones.html">Investigaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#Servicios">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="personal.html">Personal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#informacion">Inf. Gen.</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/herbario.svg' %}">
+    <link href="{% static 'assets/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'assets/plugins/bower_components/jquery-wizard-master/css/wizard.css' %}" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="{% static 'assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css' %}" rel="stylesheet">
+    <!-- toast CSS -->
+    <link href="{% static 'assets/plugins/bower_components/toast-master/css/jquery.toast.css' %}" rel="stylesheet">
+
+
+    <title>Herbario UJAT</title>
+
+    <!-- Bootstrap núcleo CSS -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/colors/blue.css' %}" id="theme" rel="stylesheet">
+
+
+    <!-- Fonts para está página -->
+    <link href="{% static 'assets/vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css">
+
+    <!-- Hoja de Estilo -->
+    <link href="{% static 'assets/css/base.css' %}" rel="stylesheet">
+
+    <!-- Fix del contenedor de la barra de menú -->
+    <style>
+        .navbar-toggler {
+            z-index: 1;
+        }
+
+        @media (max-width: 576px) {
+            nav > .container {
+                width: 100%;
+            }
+        }
+
+    </style>
+    {% block style %} {% endblock %}
+
+</head>
+
+<body class="index" id="page-top">
+<!-- Header -->
+<div id="wrapper">
+    <!-- Navigation -->
+    {% include 'base_navbar.html' %}
+    <!-- Left navbar-header -->
+    {% include 'base_sidebar.html' %}
+    <!-- Left navbar-header end -->
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fuid" style="padding-top: 5%">
+            {% block container %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!-- Footer -->
+<footer class="text-center">
+    <div class="footer-above">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col col-md-4">
+                    <h3>Ubicaci&oacute;n</h3>
+                    <p>Villahermosa
+                        <br>Tabasco, 86290</p>
+                </div>
+                <div class="footer-col col-md-4">
+                    <h3>Navegando la web</h3>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a class="btn-social btn-outline"
+                               href="https://www.facebook.com/people/Herbario-Ujat-Colecci%C3%B3n-Plantas-Vasculares/100009130950375"
+                               title="Facebook"
+                               target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="btn-social btn-outline" href="https://www.instagram.com/ujat/" title="Instagram"
+                               target="_blank"><i class="fa fa-fw fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="btn-social btn-outline" href="https://twitter.com/dacbiolujat?lang=es"
+                               title="Twitter" target="_blank"><i class="fa fa-fw fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="btn-social btn-outline" href="https://www.youtube.com/user/UJATmx" title="YouTube"
+                               target="_blank"><i class="fa fa-fw fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-col col-md-4">
+                    <h3>Sobre Nosotros</h3>
+                    <h3><a class="nav-link" href="https://ujat.mx/" target="_blank">UJAT</a></h3>
+                </div>
+            </div>
+        </div>
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        Copyright &copy; UJAT 2021
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+
+<!-- Bootstrap nucleo JavaScript -->
+<script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'assets/vendor/tether/tether.min.js' %}"></script>
+<script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<!-- Plugin JavaScript -->
+<script src="{% static 'assets/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+<!-- Formulario de Contacto JavaScript -->
+<script src="{% static 'assets/js/jqBootstrapValidation.js' %}"></script>
+<script src="{% static 'assets/js/contact_me.js' %}"></script>
+
+<!-- Scripts -->
+<script src="{% static 'assets/js/freelancer.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bower_components/jquery/dist/jquery.min.js' %}"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static 'assets/bootstrap/dist/js/tether.min.js' %}"></script>
+<script src="{% static 'assets/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/plugins/bower_components/bootstrap-extension/js/bootstrap-extension.min.js' %}"></script>
+<!-- Menu Plugin JavaScript -->
+<script src="{% static 'assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js' %}"></script>
+<!--slimscroll JavaScript -->
+<script src="{% static 'assets/js/jquery.slimscroll.js' %}"></script>
+<!--Wave Effects -->
+<script src="{% static 'assets/js/waves.js' %}"></script>
+<!-- Custom Theme JavaScript -->
+<script src="{% static 'assets/js/custom.min.js' %}"></script>
+<!--Style Switcher -->
+<script src="{% static 'assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js' %}"></script>
+</html>

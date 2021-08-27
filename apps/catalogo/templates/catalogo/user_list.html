@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active"><a href="{% url 'catalogo:usuario-list' %}">Lista de usuarios</a></li>
+{% endblock %}
+{% block subtitulo %}
+    <i class="fa fa-circle text-success"></i>
+    Lista de usuarios
+{% endblock %}
+{% block container %}
+    <div id="id_messages" class="container-fluid p-0"></div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="white-box">
+                <div class="row">
+                    {% if request.user.is_superuser or request.user.administrador %}
+                        <a href="{% url 'catalogo:usuario-add' %}" class="btn btn-success pull-left">
+                            <i class="fa fa-plus"></i> Nuevo
+                        </a>
+                    {% endif %}
+                    <table class="table table-borderless" id="tabla-usuario">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th class="text-center align-middle">Nombre de usuario</th>
+                            <th class="text-center align-middle">Nombre(s)</th>
+                            <th class="text-center align-middle">Apellidos</th>
+                            {% if request.user.is_superuser or request.user.administrativo %}
+                                <th class="text-center align-middle" width="100px">Administrador</th>
+                                <th class="text-center align-middle" width="100px">Capturista</th>
+                                <th class="text-center align-middle" width="100px">Usuario</th>
+                                <th class="text-center align-middle" width="100px">Estatus</th>
+                            {% endif %}
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for usuario in user_list %}
+                            <tr>
+                                <td>
+                                    <a class="btn btn-danger btn-circle" href="{% url 'catalogo:usuario-edit' usuario.pk %}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                </td>
+                                <td class="align-middle">{{ usuario.username }}</td>
+                                <td class="align-middle">{{ usuario.first_name }}</td>
+                                <td class="align-middle">{{ usuario.last_name }}</td>
+                                <!-- <td>{{ usuario.email }}</td> --> <!-- [Eduardo] Presenta errores -->
+                                {% if request.user.is_superuser or request.user.administrador %}
+                                    <td class="text-center align-middle">
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        {% if usuario.administrador %}
+                                            <small class="text-success">
+                                                <i class="fa fa-check-circle fa-2x"></i>
+                                            </small>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        {% if usuario.capturista %}
+                                            <small class="text-success">
+                                                <i class="fa fa-check-circle fa-2x"></i>
+                                            </small>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-center align-middle text-success">
+                                        {% if usuario.usuario %}
+                                            <small class="text-success">
+                                                <i class="fa fa-check-circle fa-2x"></i>
+                                            </small>
+                                        {% endif %}
+                                    </td>
+                                    <td class="align-middle">
+                                        <input
+                                                name="activar"
+                                                data-nombre="{{ usuario.username }}"
+                                                data-activo="{{ usuario.is_active }}"
+                                                data-model-id="{{ usuario.pk }}"
+                                                type="checkbox"
+                                                data-toggle="toggle"
+                                                data-on="Activo"
+                                                data-off="Inactivo"
+                                                {% if usuario.is_active %} checked {% endif %}
+                                        />
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <link rel="stylesheet" href="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugins/bower_components/sweetalert/sweetalert.css' %}">
+    <script src="{% static 'assets/plugins/bower_components/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bower_components/datatables-responsive/js/dataTables.responsive.js' %}"></script>
+
+    <script src="{% static 'datatable/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'datatable/jszip.min.js' %}"></script>
+    <!-- <script src="{% static 'datatable/pdfmake.min.js' %}"></script> -->
+    <script src="{% static 'datatable/vfs_fonts.js' %}"></script>
+    <script src="{% static 'datatable/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'datatable/buttons.print.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bower_components/sweetalert/sweetalert.min.js' %}"></script>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+    <script>
+        $(function () {
+            $("#tabla-pre").DataTable({
+                {% if request.user.is_superuser %}
+                    "dom": 'Bfrtip',
+                    "buttons": [
+                        'excel', 'print'
+                    ],
+                {% endif %}
+                "reponsive": true,
+                "stateSave": true,
+                "language": {
+                    "search": "Búsqueda",
+                    "paginate": {
+                        "first": "Primera",
+                        "last": "Última",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    },
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+                    "zeroRecords": "No se encontraron resultados",
+                    "infoFiltered": "(filtrando de _MAX_ registros en total)",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ de registros",
+                }
+            });
+        });
+    </script>
+    <script>
+        const toggleStatus = (e, isActive) => {
+            elementParent = e.delegateTarget.parentElement;
+
+            if (isActive) {
+                $(elementParent).removeClass('btn-light off');
+                $(elementParent).addClass('btn-primary');
+            } else {
+                $(elementParent).removeClass('btn-primary');
+                $(elementParent).addClass('btn-light off');
+            }
+        };
+
+        $(function () {
+            $("input[name='activar']").change(function (e) {
+                var isActive = $(this).is(':checked');
+                var texto = isActive ? "activar" : "desactivar";
+                var data = $(this).data();
+                swal({
+                    title: `¿Desea ${texto} al usuario ${data.nombre}?`,
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: texto.charAt(0).toUpperCase() + texto.slice(1),
+                    cancelButtonText: "Cancelar",
+                    closeOnConfirm: false,
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        swal.close();
+                        $.ajax({
+                            url: data.url,
+                            type: 'POST',
+                            data: {csrfmiddlewaretoken: '{{ csrf_token }}', pk: data.modelId},
+                            success: function (response) {
+                                if (response.error == 0) {
+                                    $("#id_messages").html(`<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>${response.message}</div>`);
+                                    setTimeout(function () {
+                                        location.reload();
+                                    }, 2500);
+                                } else if (response.error == 1 || response.error == 2) {
+                                    $("#id_messages").html(`<div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>${response.message}</div>`);
+                                }
+                            }, error: function (error) {
+                                $("#id_messages").html(`<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ha ocurrido un error, inténtelo nuevamente.</div>`);
+                            }
+                        });
+                    } else {
+                        toggleStatus(e, !isActive);
+                        $(e.delegateTarget).prop('checked', !isActive);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
