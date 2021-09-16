@@ -450,7 +450,7 @@ footer {
   
   .zoom:hover img {
   transition: all 1s ease;
-     transform:scale(2.0);
+     transform:scale(5.0);
 	 position: relative;
 	  z-index: 1;
 }

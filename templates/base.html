@@ -10,18 +10,22 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/herbario.svg' %}">
     <link href="{% static 'assets/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
-
+    <link href="{% static 'assets/plugins/bower_components/bootstrap-extension/css/bootstrap-extension.css' %}"
+          rel="stylesheet">
     <link href="{% static 'assets/plugins/bower_components/jquery-wizard-master/css/wizard.css' %}" rel="stylesheet">
+
+
     <!-- Menu CSS -->
     <link href="{% static 'assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css' %}" rel="stylesheet">
     <!-- toast CSS -->
     <link href="{% static 'assets/plugins/bower_components/toast-master/css/jquery.toast.css' %}" rel="stylesheet">
 
-
+    <link href="{% static 'assets/pu' %}">
     <title>Herbario UJAT</title>
 
     <!-- Bootstrap núcleo CSS -->
     <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Bootstrap estilo de la pagina CSS -->
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/animate.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/colors/blue.css' %}" id="theme" rel="stylesheet">
@@ -33,7 +37,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
           type="text/css">
 
-    <!-- Hoja de Estilo -->
+    <!-- Hoja de Estilo y Efecto zoom -->
     <link href="{% static 'assets/css/base.css' %}" rel="stylesheet">
 
     <!-- Fix del contenedor de la barra de menú -->
@@ -54,6 +58,7 @@
 </head>
 
 <body class="index" id="page-top">
+
 <!-- Header -->
 <div id="wrapper">
     <!-- Navigation -->
@@ -62,15 +67,36 @@
     {% include 'base_sidebar.html' %}
     <!-- Left navbar-header end -->
     <!-- Page Content -->
+    <br>
+    <br>
+    <br>
     <div id="page-wrapper">
-        <div class="container-fuid" style="padding-top: 5%">
+
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-6 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">
+                        {% block subtitulo %}{% endblock %}
+                    </h4>
+                </div>
+                <div class="col-lg-6 col-sm-8 col-md-8 col-xs-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                        {% block breadcrumbs %}
+                        {% endblock %}
+                    </ol>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <!-- messages -->
+
+            <!-- / messages -->
             {% block container %}
             {% endblock %}
         </div>
     </div>
 </div>
-
-</body>
 
 <!-- Footer -->
 <footer class="text-center">
@@ -154,4 +180,9 @@
 <script src="{% static 'assets/js/custom.min.js' %}"></script>
 <!--Style Switcher -->
 <script src="{% static 'assets/plugins/bower_components/styleswitcher/jQuery.style.switcher.js' %}"></script>
+
+<script src="https://kit.fontawesome.com/d884a41c86.js" crossorigin="anonymous"></script>
+</body>
+
+
 </html>

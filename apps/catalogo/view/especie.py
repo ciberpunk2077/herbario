@@ -3,45 +3,47 @@ from django.urls import reverse_lazy
 from django.utils.timezone import now
 from django.views.generic import ListView, CreateView, UpdateView
 
-from apps.catalogo.forms.especie import especieForm, especieUpdateForm
-from apps.catalogo.models import especie
+from apps.catalogo.forms.especie import EspecieForm, EspecieUpdateForm
+from apps.catalogo.models import Especie
 
 
-class especieListView(ListView):
-    model = especie
+class EspecieListView(ListView):
+    model = Especie
+
 
     def get_queryset(self):
-        return especie.objects.all()
+        return Especie.objects.all()
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(especieListView, self).get_context_data(**kwargs)
+        context = super(EspecieListView, self).get_context_data(**kwargs)
         return context
 
 
-class especieCreateView(CreateView):
-    model = especie
-    form_class = especieForm
+class EspecieCreateView(CreateView):
+    model = Especie
+    form_class = EspecieForm
+
 
     def form_valid(self, form):
         form.instance.user_by = self.request.user.pk
         form.save()
         messages.success(self.request, "El registro ha sido creadao con éxito.")
-        return super(especieCreateView, self).form_valid(form)
+        return super(EspecieCreateView, self).form_valid(form)
 
     def form_invalid(self, form):
         messages.error(self.request, form.errors)
-        return super(especieCreateView, self).form_invalid(form)
+        return super(EspecieCreateView, self).form_invalid(form)
 
     def get_success_url(self):
-        return reverse_lazy('catalogo:alga-list')
+        return reverse_lazy('catalogo:especie-list')
 
 
-class especieUpdateView(UpdateView):
-    model = especie
-    form_class = especieUpdateForm
+class EspecieUpdateView(UpdateView):
+    model = Especie
+    form_class = EspecieUpdateForm
 
     def get_context_data(self, **kwargs):
-        context = super(especieUpdateView, self).get_context_data(**kwargs)
+        context = super(EspecieUpdateView, self).get_context_data(**kwargs)
         context['edit'] = True
         return context
 
@@ -50,11 +52,11 @@ class especieUpdateView(UpdateView):
         form.instance.updated_at = now()
         form.save()
         messages.success(self.request, "El registro ha sido actualizado con éxito.")
-        return super(especieUpdateView, self).form_valid(form)
+        return super(EspecieUpdateView, self).form_valid(form)
 
     def form_invalid(self, form):
         messages.error(self.request, form.errors)
-        return super(especieUpdateView, self).form_invalid(form)
+        return super(EspecieUpdateView, self).form_invalid(form)
 
     def get_success_url(self):
         return reverse_lazy('catalogo:especie-list')

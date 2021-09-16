@@ -12,29 +12,28 @@
                 <li class="nav-small-cap m-t-10"><i class="fa fa-home"></i> Colecciones del Herbario</li>
                 <li>
                     <a href="javascript:void(0)" class="waves-effect">
-                        <i data-icon="F" class="linea-icon linea-software fa-users"></i>
+                        <i class="fa fa-book"></i>
                         <span class="hide-menu">Colecciones<span class="fa arrow"></span></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a href="">Plantas</a></li>
-                        <li><a href="">Frutos y Semillas</a></li>
-                        <li><a href="">Polen</a></li>
-                        <li><a href="">Algas</a></li>
-                        <li><a href="">Helechos</a></li>
-                        <li><a href="">Hongos</a></li>
+                        <li><a href="{% url 'catalogo:planta-list' %}"><i class="fas fa-cannabis"></i>Plantas</a></li>
+                        <li><a href="{% url 'catalogos:frutosemilla-list' %}"><i class="fa fa-leaf"></i></i>Frutos y Semillas</a></li>
+                        <li><a href="{% url 'catalogo:polen-list' %}"><i class="fa fa-leaf"></i>Polen</a></li>
+                        <li><a href="{% url 'catalogo:alga-list' %}"><i class="fa fa-leaf"></i>Algas</a></li>
+                        <li><a href="{% url 'catalogo:helecho-list' %}"><i class="fa fa-leaf"></i>Helechos</a></li>
+                        <li><a href="{% url 'catalogo:hongo-list' %}"><i class="fa fa-leaf"></i>Hongos</a></li>
                     </ul>
                 </li>
 
                 <li>
 
                     <a href="javascript:void(0)" class="waves-effect">
-                        <i data-icon="F" class="linea-icon linea-software fa-users"></i>
+                        <i class="fas fa-clipboard-list"></i>
                         <span class="hide-menu">Conceptos<span class="fa arrow"></span></span>
                     </a>
                     <ul class="nav nav-second-level">
                         <li><a href="{% url 'catalogo:familia-list' %}"><i class="fa fa-book"></i>Familia</a></li>
-                        <li><a href=""><i class="fa fa-book"></i>Especie</a></li>
-                        <li><a href=""><i class="fa fa-book"></i>Genero</a></li>
+                        <li><a href="{% url 'catalogo:especie-list' %}"><i class="fa fa-book"></i>Especie</a></li>
                         <li><a href=""><i class="fa fa-book"></i>Biodiversidad</a></li>
                         <li><a href=""><i class="fa fa-book"></i>Ecosistema</a></li>
                     </ul>

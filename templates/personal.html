@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block container %}
+
+    <!-- About Section -->
+    <section id="portfolio">
+        <div class="container"><br>
+            <h2 class="text-center">Personal</h2>
+
+            <hr class="pagelines-primary">
+
+            <div class="row">
+                <div class="col-md-6"><img src="{% static 'assets/img/12196248_1511165875864430_41898357400388921_n.jpg' %}"
+                                           class="img-responsive" width="100%"></div>
+                <div class="col-md-6">
+                    <ul>
+                        <li>Dra. Nelly del Carmen Jim&eacute;nez P&eacute;rez (Lider)</li>
+                        <li>M. C. Mar&iacute;a de los &Aacute;ngeles Guadarrama Olivera</li>
+                        <li>Dr. Carlos Manuel Burelo Ramos</li>
+                        <li> Ing. Nah&uacute;m Mu&ntilde;iz Chavarr&iacute;a (T&eacute;cnico Acad&eacute;mico)</li>
+                    </ul>
+                </div>
+
+            </div>
+            <br/>
+            <br/>
+            <div>
+                <h1 class="centered">Jerarquia</h1>
+                <br>
+                <br>
+                <img src="{% static 'assets/img/Diagrama Herbario.png' %}" class="centered img-responsive"/>
+            </div>
+        </div>
+    </section>
+{% endblock %}
