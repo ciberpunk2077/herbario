@@ -31,7 +31,7 @@
                             <th>COLONIA</th>
                             <th>DESCRIPCION</th>
                             <th>COLECTOR</th>
-                            <th>IMAGEN</th>
+                            <th style="width: 4%;">IMAGEN</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -52,7 +52,7 @@
                                 <td>{{ alga.colonia }}</td>
                                 <td>{{ alga.descripcion }}</td>
                                 <td>{{ alga.nombre_colector }}</td>
-                                <td class="zoom"><img src="{{ alga.imagen.url }}" width="10%"></td>
+                                <td class="zoom"><img src="{{ alga.imagen.url }}" width="100%"></td>
 
                             </tr>
                         {% endfor %}
