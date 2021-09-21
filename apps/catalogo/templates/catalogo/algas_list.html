@@ -23,15 +23,9 @@
                             <th></th>
                             <th>NOMBRE CIENTIFICO</th>
                             <th>NOMBRE COMUN</th>
+                            <th style="width: 4%;">IMAGEN</th>
                             <th>ESPECIE</th>
                             <th>GENERO</th>
-                            <th>FECHA DE RECOLECTA</th>
-                            <th>NUMERO DE RECOLECTA</th>
-                            <th>MUNICIPIO</th>
-                            <th>COLONIA</th>
-                            <th>DESCRIPCION</th>
-                            <th>COLECTOR</th>
-                            <th style="width: 4%;">IMAGEN</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -44,16 +38,9 @@
                                 </td>
                                 <td>{{ alga.nombre_cientifico }}</td>
                                 <td>{{ alga.nombre_comun }}</td>
+                                <td class="zoom"><img src="{{ alga.imagen.url }}" width="100%"></td>
                                 <td>{{ alga.especie.nombre }}</td>
                                 <td>{{ alga.get_genero_display }}</td>
-                                <td>{{ alga.fecha }}</td>
-                                <td>{{ alga.numero_recolecta }}</td>
-                                <td>{{ alga.municipio }}</td>
-                                <td>{{ alga.colonia }}</td>
-                                <td>{{ alga.descripcion }}</td>
-                                <td>{{ alga.nombre_colector }}</td>
-                                <td class="zoom"><img src="{{ alga.imagen.url }}" width="100%"></td>
-
                             </tr>
                         {% endfor %}
                         </tbody>

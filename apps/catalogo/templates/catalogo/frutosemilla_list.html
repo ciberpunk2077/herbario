@@ -24,16 +24,11 @@
                         <tr>
                             <th></th>
                             <th>NOMBRE CIENTIFICO</th>
-                            <th style="width: 4%;">IMAGEN</th>
                             <th>NOMBRE COMUN</th>
+                            <th style="width: 4%;">IMAGEN</th>
                             <th>ESPECIE</th>
                             <th>GENERO</th>
-                            <th>FECHA DE RECOLECTA</th>
-                            <th>NUMERO DE RECOLECTA</th>
-                            <th>MUNICIPIO</th>
-                            <th>COLONIA</th>
-                            <th>DESCRIPCION</th>
-                            <th>COLECTOR</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -48,16 +43,11 @@
                                     {% endif %}
                                 </td>
                                 <td>{{ fruse.nombre_cientifico }}</td>
-                                <td class="zoom"><img src="{{ fruse.imagen.url }}" width="100%"></td>
                                 <td>{{ fruse.nombre_comun }}</td>
+                                <td class="zoom"><img src="{{ fruse.imagen.url }}" width="100%"></td>
                                 <td>{{ fruse.especie.nombre }}</td>
                                 <td>{{ fruse.get_genero_display }}</td>
-                                <td>{{ fruse.fecha }}</td>
-                                <td>{{ fruse.numero_recolecta }}</td>
-                                <td>{{ fruse.municipio }}</td>
-                                <td>{{ fruse.colonia }}</td>
-                                <td>{{ fruse.descripcion }}</td>
-                                <td>{{ fruse.nombre_colector }}</td>
+
 
 
                             </tr>

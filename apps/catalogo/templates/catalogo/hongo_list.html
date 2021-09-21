@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block style %}
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+          rel="stylesheet">
 {% endblock %}
 {% block breadcrumbs %}
     <li class="breadcrumb-item active"><a href="{% url 'catalogo:hongo-list' %}">Hongos</a></li>
@@ -16,22 +17,17 @@
         <div class="col-md-12 col-lg-12 col-sm-12">
             <div class="white-box">
                 <div class="row">
-                    <a href="{% url 'catalogo:hongo-add' %}" class="btn btn-success pull-left"><i class="fa fa-plus"></i> Nuevo</a>
+                    <a href="{% url 'catalogo:hongo-add' %}" class="btn btn-success pull-left"><i
+                            class="fa fa-plus"></i> Nuevo</a>
                     <table class="table table-borderless">
                         <thead>
                         <tr>
                             <th></th>
                             <th>NOMBRE CIENTIFICO</th>
                             <th>NOMBRE COMUN</th>
+                            <th style="width: 4%;">IMAGEN</th>
                             <th>ESPECIE</th>
                             <th>GENERO</th>
-                            <th>FECHA DE RECOLECTA</th>
-                            <th>NUMERO DE RECOLECTA</th>
-                            <th>MUNICIPIO</th>
-                            <th>COLONIA</th>
-                            <th>DESCRIPCION</th>
-                            <th>COLECTOR</th>
-                            <th style="width: 4%;">IMAGEN</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -39,21 +35,17 @@
                             <tr>
                                 <td>
                                     {% if user.is_admin or user.is_superuser %}
-                                        <a data-toggle="tooltip" data-placement="top" title="Editar {{ hongo.nombre }}" class="btn btn-danger btn-circle" href="{% url 'catalogo:hongo-edit' hongo.pk %}"><i class="fa fa-edit"></i></a>
+                                        <a data-toggle="tooltip" data-placement="top" title="Editar {{ hongo.nombre }}"
+                                           class="btn btn-danger btn-circle"
+                                           href="{% url 'catalogo:hongo-edit' hongo.pk %}"><i
+                                                class="fa fa-edit"></i></a>
                                     {% endif %}
                                 </td>
                                 <td>{{ hongo.nombre_cientifico }}</td>
                                 <td>{{ hongo.nombre_comun }}</td>
+                                <td class="zoom"><img src="{{ hongo.imagen.url }}" width="100%"></td>
                                 <td>{{ hongo.especie.nombre }}</td>
                                 <td>{{ hongo.get_genero_display }}</td>
-                                <td>{{ hongo.fecha }}</td>
-                                <td>{{ hongo.numero_recolecta }}</td>
-                                <td>{{ hongo.municipio }}</td>
-                                <td>{{ hongo.colonia }}</td>
-                                <td>{{ hongo.descripcion }}</td>
-                                <td>{{ hongo.nombre_colector }}</td>
-                                <td class="zoom"><img src="{{ hongo.imagen.url }}" width="100%"></td>
-
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -64,7 +56,8 @@
     </div>
 {% endblock %}
 {% block js %}
-    <link rel="stylesheet" href="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'assets/plugins/bower_components/sweetalert/sweetalert.css' %}">
     <script src="{% static 'assets/plugins/bower_components/datatables/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js' %}"></script>

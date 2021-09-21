@@ -23,15 +23,10 @@
                             <th></th>
                             <th>NOMBRE CIENTIFICO</th>
                             <th>NOMBRE COMUN</th>
+                            <th style="width: 4%;">IMAGEN</th>
                             <th>ESPECIE</th>
                             <th>GENERO</th>
-                            <th>FECHA DE RECOLECTA</th>
-                            <th>NUMERO DE RECOLECTA</th>
-                            <th>MUNICIPIO</th>
-                            <th>COLONIA</th>
-                            <th>DESCRIPCION</th>
-                            <th>COLECTOR</th>
-                            <th style="width: 4%;">IMAGEN</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -44,16 +39,9 @@
                                 </td>
                                 <td>{{ polen.nombre_cientifico }}</td>
                                 <td>{{ polen.nombre_comun }}</td>
+                                <td class="zoom"><img src="{{ polen.imagen.url }}" width="100%"></td>
                                 <td>{{ polen.especie.nombre }}</td>
                                 <td>{{ polen.get_genero_display }}</td>
-                                <td>{{ polen.fecha }}</td>
-                                <td>{{ polen.numero_recolecta }}</td>
-                                <td>{{ polen.municipio }}</td>
-                                <td>{{ polen.colonia }}</td>
-                                <td>{{ polen.descripcion }}</td>
-                                <td>{{ polen.nombre_colector }}</td>
-                                <td class="zoom"><img src="{{ polen.imagen.url }}" width="100%"></td>
-
                             </tr>
                         {% endfor %}
                         </tbody>

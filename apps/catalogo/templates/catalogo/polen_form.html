@@ -10,7 +10,7 @@
 {% endblock %}
 {% block container %}
     <div class="row">
-        <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="col-md-12 col-lg-5 col-sm-12">
             <div class="white-box">
                 <div class="row ">
                     <form action="" method="POST" enctype="multipart/form-data" class="w-100">
@@ -23,14 +23,56 @@
                             {% else %}
                                 <button class="btn btn-success"><i class="fa fa-save"></i> Crear</button>
                             {% endif %}
-                            <a class="btn btn-danger" href="{% url 'catalogo:polen-list' %}"><i class="fa fa-arrow-left"></i> Regresar</a>
+                            <a class="btn btn-danger" href="{% url 'catalogo:polen-list' %}"><i
+                                    class="fa fa-arrow-left"></i> Regresar</a>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-5 col-sm-12">
+            <div class="white-box">
+                <div class="row ">
+
+                    <div id="imagePreview">
+                        {% if polen.imagen %}
+                            <img src="{{ polen.imagen.url }}" width="100%">
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
 {% block js %}
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        (function () {
+            function filePreview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        var img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.width = '400px'
+                        var imgPreview = document.querySelector('#imagePreview');
+                        imgPreview.innerHTML = '';
+                        imgPreview.appendChild(img);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            document.querySelector('#id_imagen').onchange = (e) => {
+                filePreview(e.srcElement);
+            }
+
+        })();
+    </script>
+
 
 {% endblock %}

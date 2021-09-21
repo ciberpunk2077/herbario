@@ -23,15 +23,9 @@
                             <th></th>
                             <th>NOMBRE CIENTIFICO</th>
                             <th>NOMBRE COMUN</th>
+                            <th style="width: 4%;">IMAGEN</th>
                             <th>ESPECIE</th>
                             <th>GENERO</th>
-                            <th>FECHA DE RECOLECTA</th>
-                            <th>NUMERO DE RECOLECTA</th>
-                            <th>MUNICIPIO</th>
-                            <th>COLONIA</th>
-                            <th>DESCRIPCION</th>
-                            <th>COLECTOR</th>
-                            <th style="width: 4%;">IMAGEN</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -44,16 +38,9 @@
                                 </td>
                                 <td>{{ helecho.nombre_cientifico }}</td>
                                 <td>{{ helecho.nombre_comun }}</td>
+                                <td class="zoom"><img src="{{ helecho.imagen.url }}" width="100%"></td>
                                 <td>{{ helecho.especie.nombre }}</td>
                                 <td>{{ helecho.get_genero_display }}</td>
-                                <td>{{ helecho.fecha }}</td>
-                                <td>{{ helecho.numero_recolecta }}</td>
-                                <td>{{ helecho.municipio }}</td>
-                                <td>{{ helecho.colonia }}</td>
-                                <td>{{ helecho.descripcion }}</td>
-                                <td>{{ helecho.nombre_colector }}</td>
-                                <td class="zoom"><img src="{{ helecho.imagen.url }}" width="100%"></td>
-
                             </tr>
                         {% endfor %}
                         </tbody>
