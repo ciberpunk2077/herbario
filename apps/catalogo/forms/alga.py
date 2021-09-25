@@ -10,7 +10,9 @@ class AlgasForm(BaseForm):
 
     class Meta:
         model = Algas
-        fields = ('nombre_cientifico', 'nombre_comun','especie',  'genero','fecha', 'numero_recolecta', 'municipio', 'colonia', 'descripcion','nombre_colector','imagen')
+        fields = (
+        'nombre_cientifico', 'nombre_comun', 'especie', 'genero', 'fecha', 'numero_recolecta', 'municipio', 'colonia',
+        'descripcion', 'nombre_colector', 'imagen')
         widgets = {
             'fecha': forms.DateInput(format=('%d/%m/%Y'), attrs={'type': 'date'})
         }
@@ -21,4 +23,9 @@ class AlgasUpdateForm(BaseForm):
 
     class Meta:
         model = Algas
-        fields = ('nombre_cientifico', 'nombre_comun','especie','genero','fecha', 'numero_recolecta', 'municipio', 'colonia', 'descripcion','nombre_colector','imagen')
+        fields = (
+        'nombre_cientifico', 'nombre_comun', 'especie', 'genero', 'fecha', 'numero_recolecta', 'municipio', 'colonia',
+        'descripcion', 'nombre_colector', 'imagen')
+
+
+

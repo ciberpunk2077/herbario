@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{% url 'catalogo:frutosemilla-list' %}">Frutos y Semillas</a></li>
+{% endblock %}
+{% block subtitulo %}
+    <i class="fa fa-circle text-success"></i>
+    Frutos y Semillas
+{% endblock %}
+{% block container %}
+    <div class="row">
+        <div class="col-md-12 col-lg-5 col-sm-12">
+            <div class="white-box">
+                <div class="row">
+                    <form action="" method="POST" enctype="multipart/form-data" class="w-100">
+
+                        <td><font size="4">NOMBRE CIENTIFICO:</font></td><br>
+                        <td><font size="3">{{ frutosemilla.nombre_cientifico }}</font></td>
+                        <br>
+                        <td><font size="4">NOMBRE COMUN:</font></td><br>
+                        <td><font size="3">{{ frutosemilla.nombre_comun }}</font></td>
+                        <br>
+                        <td><font size="4">Fecha:</font></td><br>
+                        <td><font size="3">{{ frutosemilla.fecha }}</font></td>
+                        <br>
+                        <td><font size="4">NUMERO DE RECOLECTA:</font></td>
+                        <br>
+                        <td><font size="3">{{ frutosemilla.numero_recolecta }}</font></td>
+                        <br>
+                        <td><font size="4">COLONIA:</font></td>
+                        <br>
+                        <td><font size="3">{{ frutosemilla.colonia }}</font></td>
+                        <br>
+                        <td><font size="4">LOCALIDAD:</font></td>
+                        <br>
+                        <td><font size="3">{{ frutosemilla.localidad }}</font></td>
+                        <br>
+                        <td><font size="4">DESCRIPCION:</font></td>
+                        <br>
+                        <td><font size="3">{{ frutosemilla.descripcion }}</font></td>
+                        <br>
+                        <td><font size="4">NOMBRE DEL RECOLECTOR:</font></td>
+                        <br>
+                        <td><font size="3">{{ frutosemilla.nombre_recolector }}</font></td>
+                        <br>
+                        <td><font size="4">ESPECIE:</font></td>
+                        <br>
+                        <td><font size="3">{{ frutosemilla.especie }}</font></td>
+                        <br>
+                        <td><font size="4">MUNICIPIO:</font></td>
+                        <br>
+                        <td><font size="3">{{ frutosemilla.municipio }}</font></td>
+                        <br>
+                    </form>
+
+                </div>
+                <div class="row ">
+
+                </div>
+                <br>
+                <a class="btn btn-danger" href="{% url 'catalogo:frutosemilla-list' %}"><i
+                        class="fa fa-arrow-left"></i> Regresar</a>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-5 col-sm-12">
+            <div class="white-box">
+                <div class="row ">
+
+
+                    <div id="imagePreview">
+                        {% if frutosemilla.imagen %}
+                            <img src="{{ frutosemilla.imagen.url }}" width="100%">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block js %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        (function () {
+            function filePreview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        var img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.width = '100px'
+                        var imgPreview = document.querySelector('#imagePreview');
+                        imgPreview.innerHTML = '';
+                        imgPreview.appendChild(img);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            document.querySelector('#id_imagen').onchange = (e) => {
+                filePreview(e.srcElement);
+            }
+
+        })();
+    </script>
+
+{% endblock %}
+

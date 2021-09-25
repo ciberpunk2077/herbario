@@ -18,6 +18,10 @@ class UsuarioForm(BaseForm):
     confirm_password = forms.CharField(label='Cofirmar contraseña', widget=forms.PasswordInput())
 
 
+    def __init__(self, *args, **kwargs):
+        super(UsuarioForm, self).__init__(*args, **kwargs)
+
+
     def clean(self):
         cleaned_data = super(UsuarioForm, self).clean()
         password = cleaned_data.get('password')
@@ -36,3 +40,6 @@ class UsuarioUpdateForm(BaseForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'administrador', 'capturista', 'usuario',)
+
+        def __init__(self, *args, **kwargs):
+            super(UsuarioUpdateForm, self).__init__(*args, **kwargs)

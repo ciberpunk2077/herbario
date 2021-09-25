@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 
 from apps.catalogo.forms.alga import AlgasForm, AlgasUpdateForm
 from apps.catalogo.models import Algas
@@ -58,3 +58,12 @@ class AlgasUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('catalogo:alga-list')
+
+class AlgasDetailView(TemplateView):
+    template_name = 'catalogo/algas_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AlgasDetailView, self).get_context_data(**kwargs)
+        pk_alga = self.kwargs.get('pk')
+        context['alga'] = Algas.objects.get(pk=pk_alga)
+        return context

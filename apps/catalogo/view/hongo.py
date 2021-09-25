@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, TemplateView
 
 from apps.catalogo.forms.hongo import HongoForm, HongoUpdateForm
 from apps.catalogo.models import Hongo
@@ -58,3 +58,12 @@ class HongoUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('catalogo:hongo-list')
+
+class HongoDetailView(TemplateView):
+    template_name = 'catalogo/hongo_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HongoDetailView, self).get_context_data(**kwargs)
+        pk_hongo = self.kwargs.get('pk')
+        context['hongo'] = Hongo.objects.get(pk=pk_hongo)
+        return context

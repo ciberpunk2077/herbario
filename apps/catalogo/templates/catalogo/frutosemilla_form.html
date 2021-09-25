@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href="{% url 'catalogo:alga-list' %}">Frutos y Semillas</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'catalogo:frutosemilla-list' %}">Frutos y Semillas</a></li>
     <li class="breadcrumb-item active">{% if edit %}Actualizar{% else %}Nuevo{% endif %}</li>
 {% endblock %}
 {% block subtitulo %}
     <i class="fa fa-circle text-success"></i>
-    Algas
+    Frutos y Semillas
 {% endblock %}
 {% block container %}
     <div class="row">

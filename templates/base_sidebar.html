@@ -125,10 +125,10 @@
                     <div class="sidebar-submenu">
                         <ul>
                             <li>
-                                <a href="#">Google maps</a>
+                                <a href="https://www.google.com/maps/place/DACBiol/@17.9897487,-92.9730817,15z/data=!4m5!3m4!1s0x0:0x7c49f19ef45fd213!8m2!3d17.9897487!4d-92.9730817" target="_blank">Google maps</a>
                             </li>
                             <li>
-                                <a href="#">Open street map</a>
+                                <a href="https://www.google.com/maps/place/DACBiol/@17.9897487,-92.9730817,3436m/data=!3m1!1e3!4m5!3m4!1s0x0:0x7c49f19ef45fd213!8m2!3d17.9897487!4d-92.9730817" target="_blank">Open street map</a>
                             </li>
                         </ul>
                     </div>
@@ -150,9 +150,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{% url 'catalogo:usuarios-list' %}">
                         <i class="fa fa-folder"></i>
-                        <span>Examples</span>
+                        <span>Usuarios</span>
                     </a>
                 </li>
             </ul>
@@ -173,7 +173,7 @@
             <i class="fa fa-cog"></i>
             <span class="badge-sonar"></span>
         </a>
-        <a href="{% url 'catalogos:personal' %}" title="Personal">
+        <a href="{% url 'logout' %}" title="Cerrar Sesión">
             <i class="fa fa-power-off"></i>
         </a>
     </div>

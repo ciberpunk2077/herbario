@@ -17,8 +17,10 @@
         <div class="col-md-12 col-lg-12 col-sm-12">
             <div class="white-box">
                 <div class="row">
+                 {% if user.is_admin or user.is_superuser %}
                     <a href="{% url 'catalogo:planta-add' %}" class="btn btn-success pull-left"><i
                             class="fa fa-plus"></i> Nuevo</a>
+                 {% endif %}
                     <table class="table table-borderless">
                         <thead>
                         <tr>
@@ -35,11 +37,19 @@
                         {% for planta in planta_list %}
                             <tr>
                                 <td>
-                                    {% if user.is_admin or user.is_superuser %}
+                                    {% if user.administrador or user.capturista or user.is_superuser %}
                                         <a data-toggle="tooltip" data-placement="top" title="Editar {{ planta.nombre }}"
                                            class="btn btn-danger btn-circle"
-                                           href="{% url 'catalogo:planta-edit' planta.pk %}"><i class="fa fa-edit"></i></a>
+                                           href="{% url 'catalogo:planta-edit' planta.pk %}"><i
+                                                class="fa fa-edit"></i></a>
                                     {% endif %}
+                                    {% if user.usuario %}
+                                        <a data-toggle="tooltip" data-placement="top" title="Ver {{ planta.nombre }}"
+                                           class="btn btn-danger btn-circle"
+                                           href="{% url 'catalogo:planta-detail' planta.pk %}"><i
+                                                class="fa fa-eye"></i></a>
+                                    {% endif %}
+
                                 </td>
                                 <td>{{ planta.nombre_cientifico }}</td>
                                 <td>{{ planta.nombre_comun }}</td>
@@ -74,6 +84,42 @@
     <script src="{% static 'assets/plugins/bower_components/sweetalert/sweetalert.min.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
+    <script>
+        function _remove(_nombre, _url, _object_id) {
+            swal({
+                title: "¿Desea eliminar el campo '" + _nombre + "'?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Eliminar",
+                cancelButtonText: "Cancelar",
+                closeOnConfirm: false,
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    swal.close();
+                    $.ajax({
+                        url: _url,
+                        type: 'POST',
+                        data: {csrfmiddlewaretoken: '{{ csrf_token }}', pk: _object_id},
+                        success: function (response) {
+                            if (response.error == 0) {
+                                $("#id_messages").html(`<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>${response.message}</div>`);
+                                setTimeout(function () {
+                                    location.reload();//
+                                }, 2500);
+                            } else if (response.error == 1 || response.error == 2) {
+                                $("#id_messages").html(`<div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>${response.message}</div>`);
+                            }
+                        }, error: function (error) {
+                            $("#id_messages").html(`<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ha ocurrido un error, inténtelo nuevamente.</div>`);
+                        }
+                    });
+                }
+            })
+        }
+
+        $(function () {
+        });
+    </script>
 
 
 {% endblock %}

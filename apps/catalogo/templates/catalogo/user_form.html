@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href="{% url 'catalogo:usuario-list' %}">Lista de usuarios</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'catalogo:usuarios-list' %}">Lista de usuarios</a></li>
     <li class="breadcrumb-item active">{% if edit %}Actualizar{% else %}Nuevo{% endif %}</li>
 {% endblock %}
 {% block subtitulo %}
@@ -23,7 +23,7 @@
                             {% else %}
                                 <button class="btn btn-success"><i class="fa fa-save"></i> Crear</button>
                             {% endif %}
-                            <a class="btn btn-danger" href="{% url 'catalogo:usuario-list' %}"><i class="fa fa-arrow-left"></i> Regresar</a>
+                            <a class="btn btn-danger" href="{% url 'catalogo:usuarios-list' %}"><i class="fa fa-arrow-left"></i> Regresar</a>
                         </div>
                     </form>
                 </div>

@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, TemplateView
 
 from apps.catalogo.forms.helecho import HelechoForm, HelechoUpdateForm
 from apps.catalogo.models import Helecho
@@ -58,3 +58,12 @@ class HelechoUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('catalogo:helecho-list')
+
+class HelechoDetailView(TemplateView):
+    template_name = 'catalogo/helecho_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HelechoDetailView, self).get_context_data(**kwargs)
+        pk_helecho = self.kwargs.get('pk')
+        context['helecho'] = Helecho.objects.get(pk=pk_helecho)
+        return context

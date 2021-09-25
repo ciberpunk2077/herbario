@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, TemplateView, DeleteView
 
 from apps.catalogo.forms.planta import PlantaForm, PlantaUpdateForm
 from apps.catalogo.models import Planta
@@ -57,4 +57,20 @@ class PlantaUpdateView(UpdateView):
         return super(PlantaUpdateView, self).form_invalid(form)
 
     def get_success_url(self):
+        return reverse_lazy('catalogo:planta-list')
+
+class PlantaDetailView(TemplateView):
+    template_name = 'catalogo/planta_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PlantaDetailView, self).get_context_data(**kwargs)
+        pk_planta = self.kwargs.get('pk')
+        context['planta'] = Planta.objects.get(pk=pk_planta)
+        return context
+
+class PlantaDeleteView(DeleteView):
+    model = Planta
+
+    def get_success_url(self):
+        messages.success(self.request, "El registro ha sido eliminado con éxito.")
         return reverse_lazy('catalogo:planta-list')

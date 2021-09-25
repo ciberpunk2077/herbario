@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block breadcrumbs %}
-    <li class="breadcrumb-item active"><a href="{% url 'catalogo:usuario-list' %}">Lista de usuarios</a></li>
+    <li class="breadcrumb-item active"><a href="{% url 'catalogo:usuarios-list' %}">Lista de usuarios</a></li>
 {% endblock %}
 {% block subtitulo %}
     <i class="fa fa-circle text-success"></i>
@@ -14,9 +14,8 @@
             <div class="white-box">
                 <div class="row">
                     {% if request.user.is_superuser or request.user.administrador %}
-                        <a href="{% url 'catalogo:usuario-add' %}" class="btn btn-success pull-left">
-                            <i class="fa fa-plus"></i> Nuevo
-                        </a>
+                        <a href="{% url 'catalogo:usuarios-add' %}" class="btn btn-success pull-left">
+                            <i class="fa fa-plus"></i> Nuevo</a>
                     {% endif %}
                     <table class="table table-borderless" id="tabla-usuario">
                         <thead>
@@ -37,14 +36,14 @@
                         {% for usuario in user_list %}
                             <tr>
                                 <td>
-                                    <a class="btn btn-danger btn-circle" href="{% url 'catalogo:usuario-edit' usuario.pk %}">
+                                    <a class="btn btn-danger btn-circle"
+                                       href="{% url 'catalogo:usuarios-edit' usuario.pk %}">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                 </td>
                                 <td class="align-middle">{{ usuario.username }}</td>
                                 <td class="align-middle">{{ usuario.first_name }}</td>
                                 <td class="align-middle">{{ usuario.last_name }}</td>
-                                <!-- <td>{{ usuario.email }}</td> --> <!-- [Eduardo] Presenta errores -->
                                 {% if request.user.is_superuser or request.user.administrador %}
                                     <td class="text-center align-middle">
                                     </td>
@@ -93,7 +92,8 @@
     </div>
 {% endblock %}
 {% block js %}
-    <link rel="stylesheet" href="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'assets/plugins/bower_components/sweetalert/sweetalert.css' %}">
     <script src="{% static 'assets/plugins/bower_components/datatables/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js' %}"></script>
@@ -106,7 +106,8 @@
     <script src="{% static 'datatable/buttons.html5.min.js' %}"></script>
     <script src="{% static 'datatable/buttons.print.min.js' %}"></script>
     <script src="{% static 'assets/plugins/bower_components/sweetalert/sweetalert.min.js' %}"></script>
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+          rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
     <script>

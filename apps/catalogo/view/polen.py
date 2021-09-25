@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, TemplateView
 
 from apps.catalogo.forms.polen import PolenForm, PolenUpdateForm
 from apps.catalogo.models import Polen
@@ -58,3 +58,12 @@ class PolenUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('catalogo:polen-list')
+
+class PolenDetailView(TemplateView):
+    template_name = 'catalogo/polen_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PolenDetailView, self).get_context_data(**kwargs)
+        pk_polen = self.kwargs.get('pk')
+        context['polen'] = Polen.objects.get(pk=pk_polen)
+        return context

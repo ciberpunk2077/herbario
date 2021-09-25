@@ -45,7 +45,7 @@ class UsuarioCreateView(CreateView):
         return super(UsuarioCreateView, self).form_invalid(form)
 
     def get_success_url(self):
-        return reverse_lazy('catalogo:usuario-list')
+        return reverse_lazy('catalogo:usuarios-list')
 
 
 class UsuarioUpdateView(UpdateView):
@@ -69,4 +69,4 @@ class UsuarioUpdateView(UpdateView):
         return super(UsuarioUpdateView, self).form_invalid(form)
 
     def get_success_url(self):
-        return reverse_lazy('catalogo:usuario-list')
+        return reverse_lazy('catalogo:usuarios-list')

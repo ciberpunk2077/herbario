@@ -17,8 +17,10 @@
         <div class="col-md-12 col-lg-12 col-sm-12">
             <div class="white-box">
                 <div class="row">
-                    <a href="{% url 'catalogo:frutosemilla-add' %}" class="btn btn-success pull-left"><i
-                            class="fa fa-plus"></i> Nuevo</a>
+                    {% if user.is_admin or user.is_superuser %}
+                        <a href="{% url 'catalogo:frutosemilla-add' %}" class="btn btn-success pull-left"><i
+                                class="fa fa-plus"></i> Nuevo</a>
+                    {% endif %}
                     <table class="table table-borderless">
                         <thead>
                         <tr>
@@ -35,11 +37,17 @@
                         {% for fruse in frutosemilla_list %}
                             <tr>
                                 <td>
-                                    {% if user.is_admin or user.is_superuser %}
+                                    {% if user.administrador or user.capturista or user.is_superuser %}
                                         <a data-toggle="tooltip" data-placement="top" title="Editar {{ fruse.nombre }}"
                                            class="btn btn-danger btn-circle"
                                            href="{% url 'catalogo:frutosemilla-edit' fruse.pk %}"><i
                                                 class="fa fa-edit"></i></a>
+                                    {% endif %}
+                                    {% if user.usuario %}
+                                        <a data-toggle="tooltip" data-placement="top" title="Ver {{ fruse.nombre }}"
+                                           class="btn btn-danger btn-circle"
+                                           href="{% url 'catalogo:frutosemilla_detail' fruse.pk %}"><i
+                                                class="fa fa-eye"></i></a>
                                     {% endif %}
                                 </td>
                                 <td>{{ fruse.nombre_cientifico }}</td>
@@ -47,7 +55,6 @@
                                 <td class="zoom"><img src="{{ fruse.imagen.url }}" width="100%"></td>
                                 <td>{{ fruse.especie.nombre }}</td>
                                 <td>{{ fruse.get_genero_display }}</td>
-
 
 
                             </tr>

@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block style %}
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+          rel="stylesheet">
 {% endblock %}
 {% block breadcrumbs %}
     <li class="breadcrumb-item active"><a href="{% url 'catalogo:polen-list' %}">Polen</a></li>
@@ -16,7 +17,10 @@
         <div class="col-md-12 col-lg-12 col-sm-12">
             <div class="white-box">
                 <div class="row">
-                    <a href="{% url 'catalogo:polen-add' %}" class="btn btn-success pull-left"><i class="fa fa-plus"></i> Nuevo</a>
+                    {% if user.is_admin or user.is_superuser %}
+                        <a href="{% url 'catalogo:polen-add' %}" class="btn btn-success pull-left"><i
+                                class="fa fa-plus"></i> Nuevo</a>
+                    {% endif %}
                     <table class="table table-borderless">
                         <thead>
                         <tr>
@@ -34,7 +38,16 @@
                             <tr>
                                 <td>
                                     {% if user.is_admin or user.is_superuser %}
-                                        <a data-toggle="tooltip" data-placement="top" title="Editar {{ polen.nombre }}" class="btn btn-danger btn-circle" href="{% url 'catalogo:polen-edit' polen.pk %}"><i class="fa fa-edit"></i></a>
+                                        <a data-toggle="tooltip" data-placement="top" title="Editar {{ polen.nombre }}"
+                                           class="btn btn-danger btn-circle"
+                                           href="{% url 'catalogo:polen-edit' polen.pk %}"><i
+                                                class="fa fa-edit"></i></a>
+                                    {% endif %}
+                                    {% if user.usuario %}
+                                        <a data-toggle="tooltip" data-placement="top" title="Ver {{ polen.nombre }}"
+                                           class="btn btn-danger btn-circle"
+                                           href="{% url 'catalogo:polen_detail' polen.pk %}"><i
+                                                class="fa fa-eye"></i></a>
                                     {% endif %}
                                 </td>
                                 <td>{{ polen.nombre_cientifico }}</td>
@@ -52,7 +65,8 @@
     </div>
 {% endblock %}
 {% block js %}
-    <link rel="stylesheet" href="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.css' %}">
+    <link rel="stylesheet"
+          href="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'assets/plugins/bower_components/sweetalert/sweetalert.css' %}">
     <script src="{% static 'assets/plugins/bower_components/datatables/jquery.dataTables.min.js' %}"></script>
     <script src="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js' %}"></script>
