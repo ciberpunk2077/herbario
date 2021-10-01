@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.views.generic import ListView, CreateView, UpdateView, TemplateView
+from django.views.generic import ListView, CreateView, UpdateView, TemplateView, DeleteView
 
 from apps.catalogo.forms.helecho import HelechoForm, HelechoUpdateForm
 from apps.catalogo.models import Helecho
@@ -67,3 +67,10 @@ class HelechoDetailView(TemplateView):
         pk_helecho = self.kwargs.get('pk')
         context['helecho'] = Helecho.objects.get(pk=pk_helecho)
         return context
+
+class HelechoDeleteView(DeleteView):
+    model = Helecho
+
+    def get_success_url(self):
+        messages.success(self.request, "El registro ha sido eliminado con éxito.")
+        return reverse_lazy('catalogo:helecho-list')

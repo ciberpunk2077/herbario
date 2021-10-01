@@ -2,15 +2,479 @@
 {% load static %}
 {% block container %}
 
-   <!-- About Section -->
-    <header class="masthead">
-        <div class="container">
-            <img class="img-fluid" src="{% static 'assets/img/logo1.png' %}"  alt="">
-            <div class="intro-text">
-                <span class="name">Bienvenido</span>
-                <hr class="pagelines-light">
-                <span class="skills">Divisi&oacute;n Academica de Ciencias Biologicas.</span>
+    <!-- About Section -->
+    {% if not search %}
+        <header class="masthead">
+            <div class="container">
+                <img class="img-fluid" src="{% static 'assets/img/logo1.png' %}" alt="">
+                <div class="intro-text">
+                    <span class="name">Bienvenido</span>
+                    <hr class="pagelines-light">
+                    <span class="skills">Divisi&oacute;n Academica de Ciencias Biologicas.</span>
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
+    {% endif %}
+
+    <h2>Resultado</h2>
+    <main>
+        {% for planta in plantas %}
+            <div id="id_messages" class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="white-box">
+                            <div class="row">
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>NOMBRE CIENTIFICO</th>
+                                        <th style="width: 4%;">IMAGEN</th>
+                                        <th>NOMBRE COMUN</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            {% if user.administrador or user.capturista or user.is_superuser %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Editar {{ planta.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:planta-edit' planta.pk %}"><i
+                                                        class="fa fa-edit"></i></a>
+                                                <a data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                                   class="btn btn-warning btn-circle"
+                                                   href="javascript:void(0);"
+                                                   onclick="_remove('{{ planta.nombre_cientifico }}', {{ planta.pk }},'planta');"><i
+                                                        class="fa fa-trash"></i></a>
+                                            {% endif %}
+                                            {% if user.usuario %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Ver {{ planta.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:planta_detail' planta.pk %}"><i
+                                                        class="fa fa-eye"></i></a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ planta.nombre_cientifico }}</td>
+                                        <td class="zoom"><img src="{{ planta.imagen.url }}" width="100%"></td>
+                                        <td>{{ planta.nombre_comun }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% for algas in alga %}
+            <div id="id_messages" class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="white-box">
+                            <div class="row">
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>NOMBRE CIENTIFICO</th>
+                                        <th style="width: 4%;">IMAGEN</th>
+                                        <th>NOMBRE COMUN</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            {% if user.administrador or user.capturista or user.is_superuser %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Editar {{ algas.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:alga-edit' algas.pk %}"><i
+                                                        class="fa fa-edit"></i></a>
+                                                <a data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                                   class="btn btn-warning btn-circle"
+                                                   href="javascript:void(0);"
+                                                   onclick="_remove('{{ algas.nombre_cientifico }}', {{ algas.pk }},'algas');"><i
+                                                        class="fa fa-trash"></i></a>
+                                            {% endif %}
+                                            {% if user.usuario %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Ver {{ algas.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:alga_detail' algas.pk %}"><i
+                                                        class="fa fa-eye"></i></a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ algas.nombre_cientifico }}</td>
+                                        <td class="zoom"><img src="{{ algas.imagen.url }}" width="100%"></td>
+                                        <td>{{ algas.nombre_comun }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% for polen in polens %}
+            <div id="id_messages" class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="white-box">
+                            <div class="row">
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>NOMBRE CIENTIFICO</th>
+                                        <th style="width: 4%;">IMAGEN</th>
+                                        <th>NOMBRE COMUN</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            {% if user.administrador or user.capturista or user.is_superuser %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Editar {{ polen.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:polen-edit' polen.pk %}"><i
+                                                        class="fa fa-edit"></i></a>
+                                                <a data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                                   class="btn btn-warning btn-circle"
+                                                   href="javascript:void(0);"
+                                                   onclick="_remove('{{ polen.nombre_cientifico }}', {{ polen.pk }},'polen');"><i
+                                                        class="fa fa-trash"></i></a>
+                                            {% endif %}
+                                            {% if user.usuario %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Ver {{ polen.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:polen_detail' polen.pk %}"><i
+                                                        class="fa fa-eye"></i></a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ polen.nombre_cientifico }}</td>
+                                        <td class="zoom"><img src="{{ polen.imagen.url }}" width="100%"></td>
+                                        <td>{{ polen.nombre_comun }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% for helecho in helechos %}
+            <div id="id_messages" class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="white-box">
+                            <div class="row">
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>NOMBRE CIENTIFICO</th>
+                                        <th style="width: 4%;">IMAGEN</th>
+                                        <th>NOMBRE COMUN</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            {% if user.administrador or user.capturista or user.is_superuser %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Editar {{ helecho.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:helecho-edit' helecho.pk %}"><i
+                                                        class="fa fa-edit"></i></a>
+                                                <a data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                                   class="btn btn-warning btn-circle"
+                                                   href="javascript:void(0);"
+                                                   onclick="_remove('{{ helecho.nombre_cientifico }}', {{ helecho.pk }},'helecho');"><i
+                                                        class="fa fa-trash"></i></a>
+                                            {% endif %}
+                                            {% if user.usuario %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Ver {{ helecho.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:helecho_detail' helecho.pk %}"><i
+                                                        class="fa fa-eye"></i></a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ helecho.nombre_cientifico }}</td>
+                                        <td class="zoom"><img src="{{ helecho.imagen.url }}" width="100%"></td>
+                                        <td>{{ helecho.nombre_comun }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% for hongo in hongos %}
+            <div id="id_messages" class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="white-box">
+                            <div class="row">
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>NOMBRE CIENTIFICO</th>
+                                        <th style="width: 4%;">IMAGEN</th>
+                                        <th>NOMBRE COMUN</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            {% if user.administrador or user.capturista or user.is_superuser %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Editar {{ hongo.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:hongo-edit' hongo.pk %}"><i
+                                                        class="fa fa-edit"></i></a>
+                                                <a data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                                   class="btn btn-warning btn-circle"
+                                                   href="javascript:void(0);"
+                                                   onclick="_remove('{{ hongo.nombre_cientifico }}', {{ hongo.pk }},'hongo');"><i
+                                                        class="fa fa-trash"></i></a>
+                                            {% endif %}
+                                            {% if user.usuario %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Ver {{ hongo.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:hongo_detail' hongo.pk %}"><i
+                                                        class="fa fa-eye"></i></a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ hongo.nombre_cientifico }}</td>
+                                        <td class="zoom"><img src="{{ hongo.imagen.url }}" width="100%"></td>
+                                        <td>{{ hongo.nombre_comun }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% for especie in especies %}
+            <div id="id_messages" class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="white-box">
+                            <div class="row">
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>NOMBRE</th>
+                                        <th>DESCRIPCION</th>
+                                        <th>FAMILIA</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            {% if user.administrador or user.capturista or user.is_superuser %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Editar {{ especie.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:especie-edit' especie.pk %}"><i
+                                                        class="fa fa-edit"></i></a>
+                                                <a data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                                   class="btn btn-warning btn-circle"
+                                                   href="javascript:void(0);"
+                                                   onclick="_remove('{{ especie.nombre }}', {{ especie.pk }},'especie');"><i
+                                                        class="fa fa-trash"></i></a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ especie.nombre }}</td>
+                                        <td>{{ especie.descripcion }}</td>
+                                        <td>{{ especie.familia }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% for familia in familias %}
+            <div id="id_messages" class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="white-box">
+                            <div class="row">
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>NOMBRE</th>
+                                        <th>DESCRIPCION</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            {% if user.administrador or user.capturista or user.is_superuser %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Editar {{ familia.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:familia-edit' familia.pk %}"><i
+                                                        class="fa fa-edit"></i></a>
+                                                <a data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                                   class="btn btn-warning btn-circle"
+                                                   href="javascript:void(0);"
+                                                   onclick="_remove('{{ familia.nombre }}', {{ familia.pk }},'familia');"><i
+                                                        class="fa fa-trash"></i></a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ familia.nombre }}</td>
+                                        <td>{{ familia.descripcion }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        {% for frutosemilla in frutosemillas %}
+            <div id="id_messages" class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">
+                        <div class="white-box">
+                            <div class="row">
+                                <table class="table table-borderless">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>NOMBRE CIENTIFICO</th>
+                                        <th style="width: 4%;">IMAGEN</th>
+                                        <th>NOMBRE COMUN</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            {% if user.administrador or user.capturista or user.is_superuser %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Editar {{ frutosemilla.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:frutosemilla-edit' frutosemilla.pk %}"><i
+                                                        class="fa fa-edit"></i></a>
+                                                <a data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                                   class="btn btn-warning btn-circle"
+                                                   href="javascript:void(0);"
+                                                   onclick="_remove('{{ frutosemilla.nombre_cientifico }}', {{ frutosemilla.pk }},'frutasemilla');"><i
+                                                        class="fa fa-trash"></i></a>
+                                            {% endif %}
+                                            {% if user.usuario %}
+                                                <a data-toggle="tooltip" data-placement="top"
+                                                   title="Ver {{ frutosemilla.nombre }}"
+                                                   class="btn btn-danger btn-circle"
+                                                   href="{% url 'catalogo:frutosemilla_detail' frutosemilla.pk %}"><i
+                                                        class="fa fa-eye"></i></a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ frutosemilla.nombre_cientifico }}</td>
+                                        <td class="zoom"><img src="{{ frutosemilla.imagen.url }}" width="100%"></td>
+                                        <td>{{ frutosemilla.nombre_comun }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </main>
+
+    <link rel="stylesheet"
+          href="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/plugins/bower_components/sweetalert/sweetalert.css' %}">
+    <script src="{% static 'assets/plugins/bower_components/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bower_components/datatables-responsive/js/dataTables.responsive.js' %}"></script>
+
+    <script src="{% static 'datatable/dataTables.buttons.min.js' %}"></script>
+    <script src="{% static 'datatable/jszip.min.js' %}"></script>
+    <!-- <script src="{% static 'datatable/pdfmake.min.js' %}"></script> -->
+    <script src="{% static 'datatable/vfs_fonts.js' %}"></script>
+    <script src="{% static 'datatable/buttons.html5.min.js' %}"></script>
+    <script src="{% static 'datatable/buttons.print.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/bower_components/sweetalert/sweetalert.min.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+    <script>
+        function _remove(_nombre, _object_id, campo) {
+            var url = ''
+            if(campo=='frutasemilla'){
+                url = '{% url 'catalogo-api:api-frutosemilla-remove' %}'
+            }else if(campo == 'planta'){
+                url = '{% url 'catalogo-api:api-planta-remove' %}'
+            }else if(campo == 'especie'){
+                url = '{% url 'catalogo-api:api-especie-remove' %}'
+            }else if(campo == 'familia'){
+                url = '{% url 'catalogo-api:api-familia-remove' %}'
+            }else if(campo == 'algas'){
+                url = '{% url 'catalogo-api:api-alga-remove' %}'
+            }else if(campo == 'polen'){
+                url = '{% url 'catalogo-api:api-polen-remove' %}'
+            }else if(campo == 'helecho'){
+                url = '{% url 'catalogo-api:api-helecho-remove' %}'
+            }else if(campo == 'hongo'){
+                url = '{% url 'catalogo-api:api-hongo-remove' %}'
+            }
+            console.log(_nombre)
+            console.log(_object_id)
+            swal({
+                title: "¿Desea eliminar el campo ' " + _nombre + "  '?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Eliminar",
+                cancelButtonText: "Cancelar",
+                closeOnConfirm: false,
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    swal.close();
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        data: {csrfmiddlewaretoken: '{{ csrf_token }}', pk: _object_id},
+                        success: function (response) {
+                            if (response.error == 0) {
+                                $("#id_messages").html(`<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>${response.message}</div>`);
+                                setTimeout(function () {
+                                    location.reload();//
+                                }, 2500);
+                            } else if (response.error == 1 || response.error == 2) {
+                                $("#id_messages").html(`<div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>${response.message}</div>`);
+                            }
+                        }, error: function (error) {
+                            $("#id_messages").html(`<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ha ocurrido un error, inténtelo nuevamente.</div>`);
+                        }
+                    });
+                }
+            })
+        }
+
+        $(function () {
+        });
+    </script>
+
 {% endblock %}

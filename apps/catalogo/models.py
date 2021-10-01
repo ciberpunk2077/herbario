@@ -113,6 +113,8 @@ class FrutoSemilla(models.Model):
     descripcion = models.CharField(max_length=500, null=True, blank=True)
     nombre_colector = models.CharField(max_length=200, null=True, blank=True)
     imagen = models.FileField(upload_to=get_upload_path_imagen, null=True, blank=True)
+    latitud = models.CharField(max_length=100, null=True,blank=True)
+    longitud = models.CharField(max_length=100, null=True,blank=True)
     especie = models.ForeignKey("catalogo.Especie",on_delete=models.CASCADE,null=True, blank=False)
     municipio = models.ForeignKey("catalogo.Municipio", on_delete=models.CASCADE, null=True, blank=True)
 

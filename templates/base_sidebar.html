@@ -30,7 +30,7 @@
         <div class="sidebar-search">
             <div>
                 <div class="input-group">
-                    <input type="text" class="form-control search-menu" placeholder="Busqueda...">
+                    <input type="text" class="form-control search-menu" id="search" placeholder="Busqueda...">
                     <div class="input-group-append">
               <span class="input-group-text">
                 <i class="fa fa-search" aria-hidden="true"></i>
@@ -149,11 +149,12 @@
                         <span>Calendar</span>
                     </a>
                 </li>
-                <li>
+                <li>{% if request.user.is_superuser or request.user.administrador %}
                     <a href="{% url 'catalogo:usuarios-list' %}">
                         <i class="fa fa-folder"></i>
                         <span>Usuarios</span>
                     </a>
+                    {% endif %}
                 </li>
             </ul>
         </div>
@@ -191,6 +192,15 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 <script type="text/javascript">
+    const inputSearch=document.querySelector('#search');
+    inputSearch.addEventListener('keyup', (e) => {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                const search=inputSearch.value
+                window.location.href='{% url 'catalogos:home' %}?search='+search
+            }
+        });
+
     jQuery(function ($) {
 
         $(".sidebar-dropdown > a").click(function () {

@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from apps.catalogo.forms.especie import EspecieForm, EspecieUpdateForm
 from apps.catalogo.models import Especie
@@ -59,4 +59,11 @@ class EspecieUpdateView(UpdateView):
         return super(EspecieUpdateView, self).form_invalid(form)
 
     def get_success_url(self):
+        return reverse_lazy('catalogo:especie-list')
+
+class EspecieDeleteView(DeleteView):
+    model = Especie
+
+    def get_success_url(self):
+        messages.success(self.request, "El registro ha sido eliminado con éxito.")
         return reverse_lazy('catalogo:especie-list')

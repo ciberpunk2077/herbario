@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic import ListView, CreateView, UpdateView, TemplateView, DeleteView
 
 from apps.catalogo.forms.alga import AlgasForm, AlgasUpdateForm
 from apps.catalogo.models import Algas
@@ -67,3 +67,10 @@ class AlgasDetailView(TemplateView):
         pk_alga = self.kwargs.get('pk')
         context['alga'] = Algas.objects.get(pk=pk_alga)
         return context
+
+class AlgasDeleteView(DeleteView):
+    model = Algas
+
+    def get_success_url(self):
+        messages.success(self.request, "El registro ha sido eliminado con éxito.")
+        return reverse_lazy('catalogo:alga-list')

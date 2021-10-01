@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.http import request
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView,DeleteView
 
 from apps.catalogo.forms.usuario import UsuarioForm, UsuarioUpdateForm
 from apps.catalogo.models import User
@@ -69,4 +69,11 @@ class UsuarioUpdateView(UpdateView):
         return super(UsuarioUpdateView, self).form_invalid(form)
 
     def get_success_url(self):
+        return reverse_lazy('catalogo:usuarios-list')
+
+class UsuarioDeleteView(DeleteView):
+    model = User
+
+    def get_success_url(self):
+        messages.success(self.request, "El registro ha sido eliminado con éxito.")
         return reverse_lazy('catalogo:usuarios-list')

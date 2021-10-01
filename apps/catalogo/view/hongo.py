@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.views.generic import ListView, CreateView, UpdateView, TemplateView
+from django.views.generic import ListView, CreateView, UpdateView, TemplateView, DeleteView
 
 from apps.catalogo.forms.hongo import HongoForm, HongoUpdateForm
 from apps.catalogo.models import Hongo
@@ -67,3 +67,10 @@ class HongoDetailView(TemplateView):
         pk_hongo = self.kwargs.get('pk')
         context['hongo'] = Hongo.objects.get(pk=pk_hongo)
         return context
+
+class HongoDeleteView(DeleteView):
+    model = Hongo
+
+    def get_success_url(self):
+        messages.success(self.request, "El registro ha sido eliminado con éxito.")
+        return reverse_lazy('catalogo:hongo-list')

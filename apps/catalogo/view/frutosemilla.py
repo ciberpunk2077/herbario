@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.views.generic import ListView, CreateView, UpdateView, TemplateView
+from django.views.generic import ListView, CreateView, UpdateView, TemplateView, DeleteView
 
 from apps.catalogo.forms.frutosemilla import FrutoSemillaForm, FrutoSemillaUpdateForm
 from apps.catalogo.models import FrutoSemilla
@@ -67,3 +67,10 @@ class FrutoSemillaDetailView(TemplateView):
         pk_frutosemilla = self.kwargs.get('pk')
         context['frutosemilla'] = FrutoSemilla.objects.get(pk=pk_frutosemilla)
         return context
+
+class FrutoSemillaDeleteView(DeleteView):
+    model = FrutoSemilla
+
+    def get_success_url(self):
+        messages.success(self.request, "El registro ha sido eliminado con éxito.")
+        return reverse_lazy('catalogo:frutosemilla-list')

@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.timezone import now
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from apps.catalogo.forms.familia import FamiliaForm, FamiliaUpdateForm
 from apps.catalogo.models import Familia
@@ -59,4 +59,11 @@ class FamiliaUpdateView(UpdateView):
         return super(FamiliaUpdateView, self).form_invalid(form)
 
     def get_success_url(self):
+        return reverse_lazy('catalogo:familia-list')
+
+class FamiliaDeleteView(DeleteView):
+    model = Familia
+
+    def get_success_url(self):
+        messages.success(self.request, "El registro ha sido eliminado con éxito.")
         return reverse_lazy('catalogo:familia-list')

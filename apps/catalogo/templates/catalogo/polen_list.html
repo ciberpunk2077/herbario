@@ -42,6 +42,11 @@
                                            class="btn btn-danger btn-circle"
                                            href="{% url 'catalogo:polen-edit' polen.pk %}"><i
                                                 class="fa fa-edit"></i></a>
+                                         <a data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                           class="btn btn-warning btn-circle"
+                                           href="javascript:void(0);"
+                                           onclick="_remove('{{ polen.nombre_cientifico }}', {{ polen.pk }});"><i
+                                                class="fa fa-trash"></i></a>
                                     {% endif %}
                                     {% if user.usuario %}
                                         <a data-toggle="tooltip" data-placement="top" title="Ver {{ polen.nombre }}"
@@ -80,6 +85,45 @@
     <script src="{% static 'datatable/buttons.print.min.js' %}"></script>
     <script src="{% static 'assets/plugins/bower_components/sweetalert/sweetalert.min.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+     <script>
+        function _remove(_nombre, _object_id) {
+            console.log(_nombre)
+            console.log(_object_id)
+            swal({
+                title: "¿Desea eliminar el campo ' " + _nombre + "  '?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Eliminar",
+                cancelButtonText: "Cancelar",
+                closeOnConfirm: false,
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    swal.close();
+                    $.ajax({
+                        url: '{% url 'catalogo-api:api-polen-remove' %}' ,
+                        type: 'POST',
+                        data: {csrfmiddlewaretoken: '{{ csrf_token }}', pk: _object_id},
+                        success: function (response) {
+                            if (response.error == 0) {
+                                $("#id_messages").html(`<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>${response.message}</div>`);
+                                setTimeout(function () {
+                                    location.reload();//
+                                }, 2500);
+                            } else if (response.error == 1 || response.error == 2) {
+                                $("#id_messages").html(`<div class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>${response.message}</div>`);
+                            }
+                        }, error: function (error) {
+                            $("#id_messages").html(`<div class="alert alert-danger alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Ha ocurrido un error, inténtelo nuevamente.</div>`);
+                        }
+                    });
+                }
+            })
+        }
+
+        $(function () {
+        });
+    </script>
 
 
 

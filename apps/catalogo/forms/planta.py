@@ -22,9 +22,3 @@ class PlantaUpdateForm(BaseForm):
         model = Planta
         fields = ('nombre_cientifico', 'nombre_comun','especie','genero','fecha', 'numero_recolecta', 'municipio', 'colonia', 'descripcion','nombre_colector','imagen')
 
-class PlantaDetailView(BaseForm):
-    estado = forms.CharField(widget=forms.Select(choices=ESTADOS))
-
-    class Meta:
-        model = Planta
-        fields = ('nombre_cientifico', 'nombre_comun','especie','genero','fecha', 'numero_recolecta', 'municipio', 'colonia', 'descripcion','nombre_colector','imagen')

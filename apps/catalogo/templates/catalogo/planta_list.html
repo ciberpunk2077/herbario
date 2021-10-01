@@ -17,10 +17,10 @@
         <div class="col-md-12 col-lg-12 col-sm-12">
             <div class="white-box">
                 <div class="row">
-                 {% if user.is_admin or user.is_superuser %}
-                    <a href="{% url 'catalogo:planta-add' %}" class="btn btn-success pull-left"><i
-                            class="fa fa-plus"></i> Nuevo</a>
-                 {% endif %}
+                    {% if user.is_admin or user.is_superuser %}
+                        <a href="{% url 'catalogo:planta-add' %}" class="btn btn-success pull-left"><i
+                                class="fa fa-plus"></i> Nuevo</a>
+                    {% endif %}
                     <table class="table table-borderless">
                         <thead>
                         <tr>
@@ -42,6 +42,12 @@
                                            class="btn btn-danger btn-circle"
                                            href="{% url 'catalogo:planta-edit' planta.pk %}"><i
                                                 class="fa fa-edit"></i></a>
+                                        <a data-toggle="tooltip" data-placement="top" title="Eliminar"
+                                           class="btn btn-warning btn-circle"
+                                           href="javascript:void(0);"
+                                           onclick="_remove('{{ planta.nombre }}', {{ planta.pk }});"><i
+                                                class="fa fa-trash"></i></a>
+
                                     {% endif %}
                                     {% if user.usuario %}
                                         <a data-toggle="tooltip" data-placement="top" title="Ver {{ planta.nombre }}"
@@ -85,7 +91,7 @@
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
     <script>
-        function _remove(_nombre, _url, _object_id) {
+        function _remove(_nombre, _object_id) {
             swal({
                 title: "¿Desea eliminar el campo '" + _nombre + "'?",
                 type: "warning",
@@ -97,7 +103,7 @@
                 if (isConfirm) {
                     swal.close();
                     $.ajax({
-                        url: _url,
+                        url: '{% url 'catalogo-api:api-planta-remove' %}' ,
                         type: 'POST',
                         data: {csrfmiddlewaretoken: '{{ csrf_token }}', pk: _object_id},
                         success: function (response) {
