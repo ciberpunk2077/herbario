@@ -36,7 +36,7 @@
                                 <td>
                                     {% if user.is_admin or user.is_superuser %}
                                         <a data-toggle="tooltip" data-placement="top"
-                                           title="Editar {{ especioe.nombre }}" class="btn btn-danger btn-circle"
+                                           title="Editar {{ especie.nombre }}" class="btn btn-danger btn-circle"
                                            href="{% url 'catalogo:especie-edit' especie.pk %}"><i
                                                 class="fa fa-edit"></i></a>
                                         <a data-toggle="tooltip" data-placement="top" title="Eliminar"
