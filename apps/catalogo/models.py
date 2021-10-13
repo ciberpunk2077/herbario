@@ -1,4 +1,6 @@
 import os
+
+import folium
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from apps.catalogo.extra import *
@@ -63,11 +65,21 @@ class Algas(models.Model):
     descripcion = models.CharField(max_length=500, null=True, blank=True)
     nombre_colector = models.CharField(max_length=200, null=True,blank=True)
     imagen = models.FileField(upload_to=get_upload_path_imagen, null=True, blank=True)
+    latitud = models.FloatField(max_length=100, null=True,blank=True)
+    longitud = models.FloatField(max_length=100, null=True,blank=True)
     especie = models.ForeignKey(Especie, on_delete=models.CASCADE, null=True, blank=False)
     municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         default_permissions = ()
+
+    def get_map(self):
+        if self.latitud and self.longitud:
+            map=folium.Map(location=[self.latitud, self.longitud], zoom_start=15)
+            folium.Marker(location=[self.latitud, self.longitud]).add_to(map)
+            return map
+        else:
+            return ''
 
 class Planta(models.Model):
 
@@ -88,11 +100,22 @@ class Planta(models.Model):
     descripcion = models.CharField(max_length=500, null=True, blank=True)
     nombre_colector = models.CharField(max_length=200, null=True, blank=True)
     imagen = models.FileField(upload_to=get_upload_path_imagen, null=True, blank=True)
+    latitud = models.FloatField(max_length=100, null=True,blank=True)
+    longitud = models.FloatField(max_length=100, null=True,blank=True)
     especie = models.ForeignKey(Especie, on_delete=models.CASCADE, null=True, blank=False)
     municipio = models.ForeignKey(Municipio, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         default_permissions = ()
+
+    def get_map(self):
+        if self.latitud and self.longitud:
+            map=folium.Map(location=[self.latitud, self.longitud], zoom_start=15)
+            folium.Marker(location=[self.latitud, self.longitud]).add_to(map)
+            return map
+        else:
+            return ''
+
 
 class FrutoSemilla(models.Model):
 
@@ -113,13 +136,21 @@ class FrutoSemilla(models.Model):
     descripcion = models.CharField(max_length=500, null=True, blank=True)
     nombre_colector = models.CharField(max_length=200, null=True, blank=True)
     imagen = models.FileField(upload_to=get_upload_path_imagen, null=True, blank=True)
-    latitud = models.CharField(max_length=100, null=True,blank=True)
-    longitud = models.CharField(max_length=100, null=True,blank=True)
+    latitud = models.FloatField(max_length=100, null=True,blank=True)
+    longitud = models.FloatField(max_length=100, null=True,blank=True)
     especie = models.ForeignKey("catalogo.Especie",on_delete=models.CASCADE,null=True, blank=False)
     municipio = models.ForeignKey("catalogo.Municipio", on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         default_permissions = ()
+
+    def get_map(self):
+        if self.latitud and self.longitud:
+            map=folium.Map(location=[self.latitud, self.longitud], zoom_start=15)
+            folium.Marker(location=[self.latitud, self.longitud]).add_to(map)
+            return map
+        else:
+            return ''
 
 class Polen(models.Model):
 
@@ -140,11 +171,22 @@ class Polen(models.Model):
     descripcion = models.CharField(max_length=500, null=True, blank=True)
     nombre_colector = models.CharField(max_length=200, null=True, blank=True)
     imagen = models.FileField(upload_to=get_upload_path_imagen, null=True, blank=True)
+    latitud = models.FloatField(max_length=100, null=True,blank=True)
+    longitud = models.FloatField(max_length=100, null=True,blank=True)
     especie = models.ForeignKey("catalogo.Especie",on_delete=models.CASCADE, null=True, blank=False)
     municipio = models.ForeignKey("catalogo.Municipio", on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         default_permissions = ()
+
+    def get_map(self):
+        if self.latitud and self.longitud:
+            map=folium.Map(location=[self.latitud, self.longitud], zoom_start=15)
+            folium.Marker(location=[self.latitud, self.longitud]).add_to(map)
+            return map
+        else:
+            return ''
+
 
 class Helecho(models.Model):
 
@@ -165,11 +207,22 @@ class Helecho(models.Model):
     descripcion = models.CharField(max_length=500, null=True, blank=True)
     nombre_colector = models.CharField(max_length=200, null=True, blank=True)
     imagen = models.FileField(upload_to=get_upload_path_imagen, null=True, blank=True)
+    latitud = models.FloatField(max_length=100, null=True,blank=True)
+    longitud = models.FloatField(max_length=100, null=True,blank=True)
     especie = models.ForeignKey("catalogo.Especie",on_delete=models.CASCADE,null=True, blank=False)
     municipio = models.ForeignKey("catalogo.Municipio", on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         default_permissions = ()
+
+    def get_map(self):
+        if self.latitud and self.longitud:
+            map=folium.Map(location=[self.latitud, self.longitud], zoom_start=15)
+            folium.Marker(location=[self.latitud, self.longitud]).add_to(map)
+            return map
+        else:
+            return ''
+
 
 class Hongo(models.Model):
 
@@ -190,10 +243,20 @@ class Hongo(models.Model):
     descripcion = models.CharField(max_length=500, null=True, blank=True)
     nombre_colector = models.CharField(max_length=200, null=True, blank=True)
     imagen = models.FileField(upload_to=get_upload_path_imagen, null=True, blank=True)
+    latitud = models.FloatField(max_length=100, null=True, blank=True)
+    longitud = models.FloatField(max_length=100, null=True, blank=True)
     especie = models.ForeignKey("catalogo.Especie",on_delete=models.CASCADE,null=True, blank=False)
     municipio = models.ForeignKey("catalogo.Municipio", on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         default_permissions = ()
+
+    def get_map(self):
+        if self.latitud and self.longitud:
+            map=folium.Map(location=[self.latitud, self.longitud], zoom_start=15)
+            folium.Marker(location=[self.latitud, self.longitud]).add_to(map)
+            return map
+        else:
+            return ''
 
 

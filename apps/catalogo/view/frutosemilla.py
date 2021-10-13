@@ -1,3 +1,4 @@
+import folium
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.timezone import now

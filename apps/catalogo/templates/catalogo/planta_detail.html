@@ -14,13 +14,16 @@
                 <div class="row">
                     <form action="" method="POST" enctype="multipart/form-data" class="w-100">
 
-                        <td><font size="4">NOMBRE CIENTIFICO:</font></td><br>
+                        <td><font size="4">NOMBRE CIENTIFICO:</font></td>
+                        <br>
                         <td><font size="3">{{ planta.nombre_cientifico }}</font></td>
                         <br>
-                        <td><font size="4">NOMBRE COMUN:</font></td><br>
+                        <td><font size="4">NOMBRE COMUN:</font></td>
+                        <br>
                         <td><font size="3">{{ planta.nombre_comun }}</font></td>
                         <br>
-                        <td><font size="4">Fecha:</font></td><br>
+                        <td><font size="4">Fecha:</font></td>
+                        <br>
                         <td><font size="3">{{ planta.fecha }}</font></td>
                         <br>
                         <td><font size="4">NUMERO DE RECOLECTA:</font></td>
@@ -71,6 +74,15 @@
                         {% if planta.imagen %}
                             <img src="{{ planta.imagen.url }}" width="100%">
                         {% endif %}
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="map" style="width:450px; height: 400px;">
+                                {{ planta.get_map.get_root.render | safe }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

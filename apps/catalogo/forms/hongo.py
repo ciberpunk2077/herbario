@@ -10,7 +10,7 @@ class HongoForm(BaseForm):
 
     class Meta:
         model = Hongo
-        fields = ('nombre_cientifico', 'nombre_comun','especie',  'genero','fecha', 'numero_recolecta', 'municipio', 'colonia', 'descripcion','nombre_colector','imagen')
+        fields = ('nombre_cientifico', 'nombre_comun','especie',  'genero','fecha', 'numero_recolecta', 'municipio', 'colonia', 'descripcion','nombre_colector','imagen','latitud','longitud')
         widgets = {
             'fecha': forms.DateInput(format=('%d/%m/%Y'), attrs={'type': 'date'})
         }
@@ -21,4 +21,4 @@ class HongoUpdateForm(BaseForm):
 
     class Meta:
         model = Hongo
-        fields = ('nombre_cientifico', 'nombre_comun','especie','genero','fecha', 'numero_recolecta', 'municipio', 'colonia', 'descripcion','nombre_colector','imagen')
+        fields = ('nombre_cientifico', 'nombre_comun','especie','genero','fecha', 'numero_recolecta', 'municipio', 'colonia', 'descripcion','nombre_colector','imagen','latitud','longitud')

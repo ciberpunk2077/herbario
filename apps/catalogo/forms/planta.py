@@ -9,7 +9,7 @@ class PlantaForm(BaseForm):
 
     class Meta:
         model = Planta
-        fields = ('nombre_cientifico', 'nombre_comun','especie',  'genero','fecha', 'numero_recolecta', 'municipio', 'colonia', 'descripcion','nombre_colector','imagen')
+        fields = ('nombre_cientifico', 'nombre_comun','especie',  'genero','fecha', 'numero_recolecta', 'municipio', 'colonia', 'descripcion','nombre_colector','imagen','latitud','longitud')
         widgets = {
             'fecha': forms.DateInput(format=('%d/%m/%Y'), attrs={'type': 'date'})
         }
@@ -20,5 +20,5 @@ class PlantaUpdateForm(BaseForm):
 
     class Meta:
         model = Planta
-        fields = ('nombre_cientifico', 'nombre_comun','especie','genero','fecha', 'numero_recolecta', 'municipio', 'colonia', 'descripcion','nombre_colector','imagen')
+        fields = ('nombre_cientifico', 'nombre_comun','especie','genero','fecha', 'numero_recolecta', 'municipio', 'colonia', 'descripcion','nombre_colector','imagen','latitud','longitud')
 

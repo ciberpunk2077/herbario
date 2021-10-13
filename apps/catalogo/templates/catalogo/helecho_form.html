@@ -29,6 +29,27 @@
                 </div>
             </div>
         </div>
+     <div class="col-md-12 col-lg-5 col-sm-12">
+            <div class="white-box">
+                <div class="row ">
+
+                    <div id="imagePreview">
+                        {% if helecho.imagen %}
+                            <img src="{{ helecho.imagen.url }}" width="100%">
+                        {% endif %}
+                    </div>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="map" style="width:450px; height: 400px;">
+                                {{ helecho.get_map.get_root.render | safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 {% block js %}

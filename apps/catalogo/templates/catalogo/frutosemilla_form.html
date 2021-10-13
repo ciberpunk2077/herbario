@@ -43,7 +43,9 @@
 
                     <div class="row">
                         <div class="col-lg-12">
-                            <div id="mapa" style="width:450px; height: 400px;"></div>
+                            <div id="map" style="width:450px; height: 400px;">
+                                {{ frutosemilla.get_map.get_root.render | safe }}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -52,59 +54,32 @@
     </div>
 {% endblock %}
 {% block js %}
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_YNPcQ_qv_nuhM1KF-BkzCPqeXqUjkKg&callback=initMap"></script>
-
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">
         $('document').ready(function () {
-            iniciarMapa()
-
         });
-        (function () {
-            function filePreview(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
 
-                    reader.onload = function (e) {
-                        var img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.style.width = '400px'
-                        var imgPreview = document.querySelector('#imagePreview');
-                        imgPreview.innerHTML = '';
-                        imgPreview.appendChild(img);
-                    }
-                    reader.readAsDataURL(input.files[0]);
+        function filePreview(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.width = '400px'
+                    var imgPreview = document.querySelector('#imagePreview');
+                    imgPreview.innerHTML = '';
+                    imgPreview.appendChild(img);
                 }
+                reader.readAsDataURL(input.files[0]);
             }
-
-            document.querySelector('#id_imagen').onchange = (e) => {
-                filePreview(e.srcElement);
-            }
-
-        })();
-
-        function iniciarMapa() {
-            var latitud = $('#id_latitud').val()
-            var longitud = $('#id_longitud').val()
-
-            coordenadas = {
-                lng: longitud,
-                lat: latitud
-            }
-            generarMapa(coordenadas);
         }
 
-        function generarMapa(coordenadas) {
-            var mapa = new google.maps.Map(document.getElementById('mapa'), {
-                zoom: 12,
-                center: new google.maps.LatLng(coordenadas.lat, coordenadas.lng)
-            });
-            marcador = new google.maps.Marker({
-                map: mapa,
-                draggable: true,
-                position: new google.maps.LatLng(coordenadas.lat, coordenadas.lng)
-            });
+        document.querySelector('#id_imagen').onchange = (e) => {
+            filePreview(e.srcElement);
         }
+
+
     </script>
 
 {% endblock %}

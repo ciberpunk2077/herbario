@@ -11,41 +11,50 @@
 {% block container %}
     {% if user.is_admin or user.is_superuser %}
 
-          <div class="row">
-        <div class="col-md-12 col-lg-5 col-sm-12">
-            <div class="white-box">
-                <div class="row ">
-                    <form action="" method="POST" enctype="multipart/form-data" class="w-100">
-                        {% csrf_token %}
-                        {% include 'form_snippet_general.html' %}
-                        <div class="col-md-12">
-                            <br>
-                            {% if edit %}
-                                <button class="btn btn-warning"><i class="fa fa-edit"></i> Actualizar</button>
-                            {% else %}
-                                <button class="btn btn-success"><i class="fa fa-save"></i> Crear</button>
-                            {% endif %}
-                            <a class="btn btn-danger" href="{% url 'catalogo:planta-list' %}"><i
-                                    class="fa fa-arrow-left"></i> Regresar</a>
-                        </div>
-                    </form>
+        <div class="row">
+            <div class="col-md-12 col-lg-5 col-sm-12">
+                <div class="white-box">
+                    <div class="row ">
+                        <form action="" method="POST" enctype="multipart/form-data" class="w-100">
+                            {% csrf_token %}
+                            {% include 'form_snippet_general.html' %}
+                            <div class="col-md-12">
+                                <br>
+                                {% if edit %}
+                                    <button class="btn btn-warning"><i class="fa fa-edit"></i> Actualizar</button>
+                                {% else %}
+                                    <button class="btn btn-success"><i class="fa fa-save"></i> Crear</button>
+                                {% endif %}
+                                <a class="btn btn-danger" href="{% url 'catalogo:planta-list' %}"><i
+                                        class="fa fa-arrow-left"></i> Regresar</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-12 col-lg-5 col-sm-12">
-            <div class="white-box">
-                <div class="row ">
+            <div class="col-md-12 col-lg-5 col-sm-12">
+                <div class="white-box">
+                    <div class="row ">
 
                         <div id="imagePreview">
                             {% if planta.imagen %}
                                 <img src="{{ planta.imagen.url }}" width="100%">
                             {% endif %}
                         </div>
+                        <br>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div id="map" style="width:450px; height: 400px;">
+                                    {{ planta.get_map.get_root.render | safe }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     {% endif %}
 
 
@@ -54,31 +63,32 @@
 {% endblock %}
 {% block js %}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
 
-    (function () {
-        function filePreview(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+        (function () {
+            function filePreview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
 
-                reader.onload = function (e) {
-                    var img=document.createElement('img');
-                    img.src=e.target.result;
-                    img.style.width='100px'
-                    var imgPreview=document.querySelector('#imagePreview');
-                    imgPreview.innerHTML='';
-                    imgPreview.appendChild(img);
+                    reader.onload = function (e) {
+                        var img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.width = '100px'
+                        var imgPreview = document.querySelector('#imagePreview');
+                        imgPreview.innerHTML = '';
+                        imgPreview.appendChild(img);
+                    }
+                    reader.readAsDataURL(input.files[0]);
                 }
-                reader.readAsDataURL(input.files[0]);
             }
-        }
-        document.querySelector('#id_imagen').onchange=(e)=>{
-            filePreview(e.srcElement);
-        }
 
-    })();
-</script>
+            document.querySelector('#id_imagen').onchange = (e) => {
+                filePreview(e.srcElement);
+            }
+
+        })();
+    </script>
 
 {% endblock %}
 
