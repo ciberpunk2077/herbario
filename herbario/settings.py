@@ -12,9 +12,12 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import json
 import os.path
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
 from django.conf.global_settings import AUTH_USER_MODEL
 
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -22,20 +25,20 @@ from django.conf.global_settings import AUTH_USER_MODEL
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-def get_secret(var):
-    config_data = open(str(BASE_DIR) + '/secret.json').read()
-    json_data = json.loads(config_data)
-    data_conf = json_data[var]
-    return data_conf
+# def get_secret(var):
+#     config_data = open(str(BASE_DIR) + '/secret.json').read()
+#     json_data = json.loads(config_data)
+#     data_conf = json_data[var]
+#     return data_conf
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = get_secret('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = get_secret('DEBUG')
+DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -103,12 +106,13 @@ LOGOUT_REDIRECT_URL = '/login/'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': get_secret('DB_NAME'),
-        'USER': get_secret('DB_USER'),
-        'PASSWORD': get_secret('DB_PASSWORD'),
-        'HOST': get_secret('DB_HOST'),
-        'PORT': get_secret('DB_PORT'),
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.getenv('DB_NAME'),
+        # 'USER': os.getenv('DB_USER'),
+        # 'PASSWORD': os.getenv('DB_PASSWORD'),
+        # 'HOST': os.getenv('DB_HOST'),
+        # 'PORT': os.getenv('DB_PORT'),
     }
 }
 
@@ -164,3 +168,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'catalogo.User'
 
+"import django_heroku" 
+"django_heroku.settings(locals())" 

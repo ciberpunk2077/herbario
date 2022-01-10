@@ -9,26 +9,30 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/img/herbario.svg' %}">
-    <link href="{% static 'assets/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+{#    <link href="{% static 'assets/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">#}
     <link href="{% static 'assets/plugins/bower_components/bootstrap-extension/css/bootstrap-extension.css' %}"
           rel="stylesheet">
-    <link href="{% static 'assets/plugins/bower_components/jquery-wizard-master/css/wizard.css' %}" rel="stylesheet">
+{#    esto es una preuba inicia#}
+
+
+{#termina la prueba#}
+{#    <link href="{% static 'assets/plugins/bower_components/jquery-wizard-master/css/wizard.css' %}" rel="stylesheet">#}
 
 
     <!-- Menu CSS -->
     <link href="{% static 'assets/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css' %}" rel="stylesheet">
     <!-- toast CSS -->
-    <link href="{% static 'assets/plugins/bower_components/toast-master/css/jquery.toast.css' %}" rel="stylesheet">
+{#    <link href="{% static 'assets/plugins/bower_components/toast-master/css/jquery.toast.css' %}" rel="stylesheet">#}
 
     <link href="{% static 'assets/pu' %}">
     <title>Herbario UJAT</title>
 
     <!-- Bootstrap núcleo CSS -->
-    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+{#    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">#}
     <!-- Bootstrap estilo de la pagina CSS -->
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/css/animate.css' %}" rel="stylesheet">
-    <link href="{% static 'assets/css/colors/blue.css' %}" id="theme" rel="stylesheet">
+{#    <link href="{% static 'assets/css/animate.css' %}" rel="stylesheet">#}
+{#    <link href="{% static 'assets/css/colors/blue.css' %}" id="theme" rel="stylesheet">#}
 
 
     <!-- Fonts para está página -->
@@ -62,6 +66,7 @@
 <div class="page-wrapper chiller-theme toggled">
 
     {% include 'base_sidebar.html' %}
+    {% include 'base_navbar.html' %}
     <!-- sidebar-wrapper  -->
     <main class="page-content">
         <div class="container-fluid">
@@ -80,6 +85,7 @@
                     </ol>
                 </div>
             </div>
+            <!-- en esta parte se pone lo que va dentro de home -->
             {% block container %}
             {% endblock %}
         </div>
@@ -88,13 +94,13 @@
     <!-- page-content" -->
 </div>
 <!-- page-wrapper -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"#}
+{#        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"#}
+{#        crossorigin="anonymous"></script>#}
+{#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"#}
+{#        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"#}
+{#        crossorigin="anonymous"></script>#}
 {% block js %}
 {% endblock %}
 </body>
