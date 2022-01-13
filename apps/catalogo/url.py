@@ -49,7 +49,7 @@ urlpatterns = [
     path('planta/', login_required(PlantaListView.as_view()), name="planta-list"),
     path('planta/add/', login_required(PlantaCreateView.as_view()), name="planta-add"),
     path('planta/<int:pk>/edit/', login_required(PlantaUpdateView.as_view()), name="planta-edit"),
-    path('planta/<int:pk>/detail/', login_required(PlantaDetailView.as_view()), name="planta-detail"),
+    path('planta/<int:pk>/detail/', login_required(PlantaDetailView.as_view()), name="planta_detail"),
 
     # URLs para CRUD Frutos y Semillas
     path('frutosemilla/', login_required(FrutoSemillaListView.as_view()), name="frutosemilla-list"),

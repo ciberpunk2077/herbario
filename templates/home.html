@@ -15,10 +15,10 @@
             </div>
         </header>
     {% endif %}
-
-    {% if search %}
+{% if search %}
+    {% if especies or plantas or alga or polens or frutosemillas or familias or helechos or hongos %}
     <h2>Resultado</h2>
-    {% endif %}
+
     <main>
         {% for planta in plantas %}
             <div id="id_messages" class="container-fluid p-0">
@@ -404,8 +404,12 @@
                 </div>
             </div>
         {% endfor %}
-    </main>
 
+    </main>
+    {% else %}
+    <h2>No se encontro resultado</h2>
+    {% endif %}
+{% endif %}
     <link rel="stylesheet"
           href="{% static 'assets/plugins/bower_components/datatables-plugins/integration/bootstrap/1/dataTables.bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'assets/plugins/bower_components/sweetalert/sweetalert.css' %}">
